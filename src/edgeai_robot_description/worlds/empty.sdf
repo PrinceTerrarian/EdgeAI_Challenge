@@ -1,41 +1,19 @@
-<?xml version="1.0" ?>
-
+<?xml version='1.0' encoding='utf-8'?>
 <sdf version="1.9">
-
   <world name="empty">
-
-    <!-- Physics -->
     <physics name="physics" type="ignored">
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1.0</real_time_factor>
     </physics>
-
-    <!-- Gazebo core systems -->
-    <plugin
-      filename="gz-sim-physics-system"
-      name="gz::sim::systems::Physics"/>
-
-    <plugin
-      filename="gz-sim-user-commands-system"
-      name="gz::sim::systems::UserCommands"/>
-
-    <plugin
-      filename="gz-sim-scene-broadcaster-system"
-      name="gz::sim::systems::SceneBroadcaster"/>
-
-    <!-- Required for GPU LiDAR / camera sensors -->
-    <plugin
-      filename="gz-sim-sensors-system"
-      name="gz::sim::systems::Sensors">
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
       <render_engine>ogre2</render_engine>
     </plugin>
-
-    <!-- Ground -->
     <model name="ground_plane">
       <static>true</static>
-
       <link name="link">
-
         <collision name="collision">
           <geometry>
             <plane>
@@ -44,7 +22,6 @@
             </plane>
           </geometry>
         </collision>
-
         <visual name="visual">
           <geometry>
             <plane>
@@ -52,249 +29,1179 @@
               <size>100 100</size>
             </plane>
           </geometry>
-
           <material>
             <ambient>0.8 0.8 0.8 1</ambient>
             <diffuse>0.8 0.8 0.8 1</diffuse>
-            <specular>0.0 0.0 0.0 1</specular>
+            <specular>0 0 0 1</specular>
           </material>
-
         </visual>
-
       </link>
     </model>
-
-
-  <!-- ===================================================== -->
-  <!-- 5 m x 5 m Arena Walls                                -->
-  <!-- ===================================================== -->
-
-  <!-- North wall -->
-  <model name="north_wall">
-    <static>true</static>
-    <pose>0 2.55 0.25 0 0 0</pose>
-
-    <link name="link">
-      <collision name="collision">
-        <geometry>
-          <box>
-            <size>5.2 0.1 0.5</size>
-          </box>
-        </geometry>
-      </collision>
-
-      <visual name="visual">
-        <geometry>
-          <box>
-            <size>5.2 0.1 0.5</size>
-          </box>
-        </geometry>
-      </visual>
-    </link>
-  </model>
-
-
-  <!-- South wall -->
-  <model name="south_wall">
-    <static>true</static>
-    <pose>0 -2.55 0.25 0 0 0</pose>
-
-    <link name="link">
-      <collision name="collision">
-        <geometry>
-          <box>
-            <size>5.2 0.1 0.5</size>
-          </box>
-        </geometry>
-      </collision>
-
-      <visual name="visual">
-        <geometry>
-          <box>
-            <size>5.2 0.1 0.5</size>
-          </box>
-        </geometry>
-      </visual>
-    </link>
-  </model>
-
-
-  <!-- East wall -->
-  <model name="east_wall">
-    <static>true</static>
-    <pose>2.55 0 0.25 0 0 0</pose>
-
-    <link name="link">
-      <collision name="collision">
-        <geometry>
-          <box>
-            <size>0.1 5.2 0.5</size>
-          </box>
-        </geometry>
-      </collision>
-
-      <visual name="visual">
-        <geometry>
-          <box>
-            <size>0.1 5.2 0.5</size>
-          </box>
-        </geometry>
-      </visual>
-    </link>
-  </model>
-
-
-  <!-- West wall -->
-  <model name="west_wall">
-    <static>true</static>
-    <pose>-2.55 0 0.25 0 0 0</pose>
-
-    <link name="link">
-      <collision name="collision">
-        <geometry>
-          <box>
-            <size>0.1 5.2 0.5</size>
-          </box>
-        </geometry>
-      </collision>
-
-      <visual name="visual">
-        <geometry>
-          <box>
-            <size>0.1 5.2 0.5</size>
-          </box>
-        </geometry>
-      </visual>
-    </link>
-  </model>
-
-
-   <!-- ===================================================== -->
-  <!-- Internal Obstacles - Arena v1                         -->
-  <!-- ===================================================== -->
-
-  <!-- ===================================================== -->
-  <!-- Obstacle 1: Horizontal obstacle                       -->
-  <!-- Position: (-0.8, 0.9)                                -->
-  <!-- Size: 0.8 x 0.3 x 0.5 m                              -->
-  <!-- ===================================================== -->
-  <model name="obstacle_1">
-    <static>true</static>
-
-    <!-- x y z roll pitch yaw -->
-    <pose>-0.8 0.9 0.25 0 0 0</pose>
-
-    <link name="link">
-
-      <collision name="collision">
-        <geometry>
-          <box>
-            <size>0.8 0.3 0.5</size>
-          </box>
-        </geometry>
-      </collision>
-
-      <visual name="visual">
-        <geometry>
-          <box>
-            <size>0.8 0.3 0.5</size>
-          </box>
-        </geometry>
-      </visual>
-
-    </link>
-  </model>
-
-
-  <!-- ===================================================== -->
-  <!-- Obstacle 2: Vertical obstacle                         -->
-  <!-- Position: (1.1, 0.5)                                 -->
-  <!-- Size: 0.3 x 1.0 x 0.5 m                              -->
-  <!-- ===================================================== -->
-  <model name="obstacle_2">
-    <static>true</static>
-
-    <!-- x y z roll pitch yaw -->
-    <pose>1.1 0.5 0.25 0 0 0</pose>
-
-    <link name="link">
-
-      <collision name="collision">
-        <geometry>
-          <box>
-            <size>0.3 1.0 0.5</size>
-          </box>
-        </geometry>
-      </collision>
-
-      <visual name="visual">
-        <geometry>
-          <box>
-            <size>0.3 1.0 0.5</size>
-          </box>
-        </geometry>
-      </visual>
-
-    </link>
-  </model>
-
-
-  <!-- ===================================================== -->
-  <!-- Obstacle 3: Rotated obstacle                          -->
-  <!-- Position: (0.8, -1.2)                                -->
-  <!-- Size: 0.8 x 0.3 x 0.5 m                              -->
-  <!-- Rotation: 30 degrees                                  -->
-  <!-- ===================================================== -->
-  <model name="obstacle_3">
-    <static>true</static>
-
-    <!--
-      pose format:
-      x y z roll pitch yaw
-
-      30 degrees = pi / 6 ≈ 0.523599 rad
-    -->
-    <pose>0.8 -1.2 0.25 0 0 0.523599</pose>
-
-    <link name="link">
-
-      <collision name="collision">
-        <geometry>
-          <box>
-            <size>0.8 0.3 0.5</size>
-          </box>
-        </geometry>
-      </collision>
-
-      <visual name="visual">
-        <geometry>
-          <box>
-            <size>0.8 0.3 0.5</size>
-          </box>
-        </geometry>
-      </visual>
-
-    </link>
-  </model>
-
-    <!-- Lighting -->
-    <light type="directional" name="sun">
-      <cast_shadows>true</cast_shadows>
-
-      <pose>0 0 10 0 0 0</pose>
-
-      <diffuse>0.7 0.7 0.7 1</diffuse>
-      <specular>0.0 0.0 0.0 1</specular>
-
-      <direction>-0.5 0.1 -0.9</direction>
-    </light>
-
-    <scene>
-      <ambient>0.5 0.5 0.5 1</ambient>
-      <background>0.15 0.15 0.15 1</background>
-      <shadows>true</shadows>
-    </scene>
-
+    <model name="south_wall">
+      <static>true</static>
+      <pose>2.5 -0.05 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>5.2 0.1 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>5.2 0.1 0.5</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name="north_wall">
+      <static>true</static>
+      <pose>2.5 5.05 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>5.2 0.1 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>5.2 0.1 0.5</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name="west_wall">
+      <static>true</static>
+      <pose>-0.05 2.5 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.1 5.2 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.1 5.2 0.5</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name="east_wall">
+      <static>true</static>
+      <pose>5.05 2.5 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.1 5.2 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.1 5.2 0.5</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name="wall_W1">
+      <static>true</static>
+      <pose>1.125 3.1 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>2.25 0.1 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>2.25 0.1 0.5</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name="wall_W1b">
+      <static>true</static>
+      <pose>2.2 3.35 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.1 0.5 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.1 0.5 0.5</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name="wall_W2">
+      <static>true</static>
+      <pose>3.4 1.4 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.1 2.8 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.1 2.8 0.5</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name="obstacle_O2">
+      <static>true</static>
+      <pose>2.2 2.0 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.6 1.0 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.6 1.0 0.5</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name="obstacle_O3">
+      <static>true</static>
+      <pose>4.4 3.6 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.8 0.6 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.8 0.6 0.5</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name="start_area_visual">
+      <static>true</static>
+      <pose>0.8 0.5 0.008 0 0 0</pose>
+      <link name="link">
+        <visual name="area">
+          <geometry>
+            <box>
+              <size>1.4 1.0 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.25 0.48 1.0 0.30</ambient>
+            <diffuse>0.25 0.48 1.0 0.30</diffuse>
+            <specular>0 0 0 0</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="single_target_detection_zone">
+      <static>true</static>
+      <pose>1.0 4.1 0.012 0 0 0</pose>
+      <link name="link">
+        <visual name="zone">
+          <geometry>
+            <cylinder>
+              <radius>0.5</radius>
+              <length>0.008</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>1 0.15 0.15 0.22</ambient>
+            <diffuse>1 0.15 0.15 0.22</diffuse>
+            <specular>0 0 0 0</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="cooperative_target_detection_zone">
+      <static>true</static>
+      <pose>4.1 1.0 0.012 0 0 0</pose>
+      <link name="link">
+        <visual name="zone">
+          <geometry>
+            <cylinder>
+              <radius>0.7</radius>
+              <length>0.008</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.15 0.3 1 0.22</ambient>
+            <diffuse>0.15 0.3 1 0.22</diffuse>
+            <specular>0 0 0 0</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="single_target_S1_aruco_stand">
+      <static>true</static>
+      <pose>1.000 4.100 0 0 0 0</pose>
+      <link name="stand_and_marker">
+        <collision name="stand_base_collision">
+          <pose>0 0 0.0200 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.07</radius>
+              <length>0.04</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="stand_base">
+          <pose>0 0 0.0200 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.07</radius>
+              <length>0.04</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.55 0.55 0.55 1</ambient>
+            <diffuse>0.55 0.55 0.55 1</diffuse>
+            <specular>0 0 0 1</specular>
+          </material>
+        </visual>
+        <collision name="stand_post_collision">
+          <pose>0 0 0.1450 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.015</radius>
+              <length>0.21</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="stand_post">
+          <pose>0 0 0.1450 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.015</radius>
+              <length>0.21</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.65 0.65 0.65 1</ambient>
+            <diffuse>0.65 0.65 0.65 1</diffuse>
+            <specular>0 0 0 1</specular>
+          </material>
+        </visual>
+        <visual name="white_marker_board">
+          <pose>0 0 0.350 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.200000 0.020000 0.200000</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0 0 0 1</specular>
+          </material>
+        </visual>
+        <collision name="board_collision">
+          <pose>0 0 0.350 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.200000 0.020000 0.200000</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="aruco_1_r0_c0">
+          <pose>-0.066667 -0.010750 0.416667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r0_c1">
+          <pose>-0.040000 -0.010750 0.416667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r0_c2">
+          <pose>-0.013333 -0.010750 0.416667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r0_c3">
+          <pose>0.013333 -0.010750 0.416667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r0_c4">
+          <pose>0.040000 -0.010750 0.416667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r0_c5">
+          <pose>0.066667 -0.010750 0.416667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r1_c0">
+          <pose>-0.066667 -0.010750 0.390000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r1_c1">
+          <pose>-0.040000 -0.010750 0.390000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r1_c2">
+          <pose>-0.013333 -0.010750 0.390000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r1_c3">
+          <pose>0.013333 -0.010750 0.390000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r1_c4">
+          <pose>0.040000 -0.010750 0.390000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r1_c5">
+          <pose>0.066667 -0.010750 0.390000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r2_c0">
+          <pose>-0.066667 -0.010750 0.363333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r2_c5">
+          <pose>0.066667 -0.010750 0.363333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r3_c0">
+          <pose>-0.066667 -0.010750 0.336667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r3_c2">
+          <pose>-0.013333 -0.010750 0.336667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r3_c3">
+          <pose>0.013333 -0.010750 0.336667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r3_c5">
+          <pose>0.066667 -0.010750 0.336667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r4_c0">
+          <pose>-0.066667 -0.010750 0.310000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r4_c2">
+          <pose>-0.013333 -0.010750 0.310000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r4_c4">
+          <pose>0.040000 -0.010750 0.310000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r4_c5">
+          <pose>0.066667 -0.010750 0.310000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r5_c0">
+          <pose>-0.066667 -0.010750 0.283333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r5_c1">
+          <pose>-0.040000 -0.010750 0.283333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r5_c2">
+          <pose>-0.013333 -0.010750 0.283333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r5_c3">
+          <pose>0.013333 -0.010750 0.283333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r5_c4">
+          <pose>0.040000 -0.010750 0.283333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_1_r5_c5">
+          <pose>0.066667 -0.010750 0.283333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="cooperative_target_C1_aruco_stand">
+      <static>true</static>
+      <pose>4.100 1.000 0 0 0 0</pose>
+      <link name="stand_and_marker">
+        <collision name="stand_base_collision">
+          <pose>0 0 0.0200 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.07</radius>
+              <length>0.04</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="stand_base">
+          <pose>0 0 0.0200 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.07</radius>
+              <length>0.04</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.55 0.55 0.55 1</ambient>
+            <diffuse>0.55 0.55 0.55 1</diffuse>
+            <specular>0 0 0 1</specular>
+          </material>
+        </visual>
+        <collision name="stand_post_collision">
+          <pose>0 0 0.1450 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.015</radius>
+              <length>0.21</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="stand_post">
+          <pose>0 0 0.1450 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.015</radius>
+              <length>0.21</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.65 0.65 0.65 1</ambient>
+            <diffuse>0.65 0.65 0.65 1</diffuse>
+            <specular>0 0 0 1</specular>
+          </material>
+        </visual>
+        <visual name="white_marker_board">
+          <pose>0 0 0.350 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.200000 0.020000 0.200000</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>0 0 0 1</specular>
+          </material>
+        </visual>
+        <collision name="board_collision">
+          <pose>0 0 0.350 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.200000 0.020000 0.200000</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="aruco_2_r0_c0">
+          <pose>0.066667 0.010750 0.416667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r0_c1">
+          <pose>0.040000 0.010750 0.416667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r0_c2">
+          <pose>0.013333 0.010750 0.416667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r0_c3">
+          <pose>-0.013333 0.010750 0.416667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r0_c4">
+          <pose>-0.040000 0.010750 0.416667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r0_c5">
+          <pose>-0.066667 0.010750 0.416667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r1_c0">
+          <pose>0.066667 0.010750 0.390000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r1_c1">
+          <pose>0.040000 0.010750 0.390000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r1_c2">
+          <pose>0.013333 0.010750 0.390000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r1_c5">
+          <pose>-0.066667 0.010750 0.390000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r2_c0">
+          <pose>0.066667 0.010750 0.363333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r2_c1">
+          <pose>0.040000 0.010750 0.363333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r2_c2">
+          <pose>0.013333 0.010750 0.363333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r2_c5">
+          <pose>-0.066667 0.010750 0.363333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r3_c0">
+          <pose>0.066667 0.010750 0.336667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r3_c1">
+          <pose>0.040000 0.010750 0.336667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r3_c2">
+          <pose>0.013333 0.010750 0.336667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r3_c4">
+          <pose>-0.040000 0.010750 0.336667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r3_c5">
+          <pose>-0.066667 0.010750 0.336667 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r4_c0">
+          <pose>0.066667 0.010750 0.310000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r4_c3">
+          <pose>-0.013333 0.010750 0.310000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r4_c5">
+          <pose>-0.066667 0.010750 0.310000 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r5_c0">
+          <pose>0.066667 0.010750 0.283333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r5_c1">
+          <pose>0.040000 0.010750 0.283333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r5_c2">
+          <pose>0.013333 0.010750 0.283333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r5_c3">
+          <pose>-0.013333 0.010750 0.283333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r5_c4">
+          <pose>-0.040000 0.010750 0.283333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <visual name="aruco_2_r5_c5">
+          <pose>-0.066667 0.010750 0.283333 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.026667 0.001500 0.026667</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>0 0 0 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+      </link>
+    </model>
   </world>
-
 </sdf>
