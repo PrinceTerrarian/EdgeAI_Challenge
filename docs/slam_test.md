@@ -14,25 +14,19 @@
 **终端 1：Gazebo + 机器人**
 ```bash
 cd ~/edgeai_ws/src/EdgeAI_Challenge
-pixi shell
-source install/setup.bash
-ros2 launch edgeai_robot_description simulation_slam_test.launch.py
+pixi run bash -c 'source install/setup.bash && ros2 launch edgeai_robot_description simulation_slam_test.launch.py'
 ```
 
 **终端 2：SLAM Toolbox（另开终端）**
 ```bash
 cd ~/edgeai_ws/src/EdgeAI_Challenge
-pixi shell
-source install/setup.bash
-ros2 launch slam_toolbox online_async_launch.py use_sim_time:=true
+pixi run bash -c 'source install/setup.bash && ros2 launch slam_toolbox online_async_launch.py use_sim_time:=true'
 ```
 
 **终端 3：RViz2（另开终端）**
 ```bash
 cd ~/edgeai_ws/src/EdgeAI_Challenge
-pixi shell
-source install/setup.bash
-rviz2 -d src/edgeai_robot_description/rviz/realistic_robot.rviz
+pixi run bash -c 'source install/setup.bash && rviz2 -d src/edgeai_robot_description/rviz/realistic_robot.rviz'
 ```
 
 在 RViz2 中设置 `Fixed Frame = map`，`Map Topic = /map`，检查 `Map → Status: OK`。新的对照实验应先关闭旧 Gazebo 和 SLAM 进程，避免沿用上一次的实时地图。
